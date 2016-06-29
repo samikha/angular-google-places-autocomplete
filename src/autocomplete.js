@@ -339,7 +339,7 @@ angular.module('google.places', [])
             '<div class="pac-container" ng-if="isOpen()" ng-style="{top: position.top+\'px\', left: position.left+\'px\', width: position.width+\'px\'}" style="display: block;" role="listbox" aria-hidden="{{!isOpen()}}">',
             '  <div class="pac-item" g-places-autocomplete-prediction index="$index" prediction="prediction" query="query"',
             '       ng-repeat="prediction in predictions track by $index" ng-class="{\'pac-item-selected\': isActive($index) }"',
-            '       ng-mouseenter="selectActive($index)" ng-click="selectPrediction($index)" role="option" id="{{prediction.id}}">',
+            '       ng-mouseenter="selectActive($index)" ng-click="selectPrediction($index)" ng-mousedown="selectPrediction($index)" role="option" id="{{prediction.id}}">',
             '  </div>',
             '</div>'
         ];
@@ -355,9 +355,10 @@ angular.module('google.places', [])
             },
             template: TEMPLATE.join(''),
             link: function ($scope, element) {
-                element.bind('mousedown', function (event) {
-                    event.preventDefault();  // prevent blur event from firing when clicking selection
-                });
+                // Disabling this and using ng-mousedown directely, as this was preventing clicking on iOS devices running WkWebView
+                //element.bind('mousedown', function (event) {
+                //    event.preventDefault();  // prevent blur event from firing when clicking selection
+                //});
 
                 $window.onresize = function () {
                     $scope.$apply(function () {
