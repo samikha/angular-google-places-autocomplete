@@ -64,7 +64,7 @@ angular.module('google.places', [])
 
                     function initEvents() {
                         element.bind('keydown', onKeydown);
-                        element.bind('blur', onBlur);
+                        element.bind('focusout', onBlur);
                         element.bind('submit', onBlur);
 
                         $scope.$watch('selected', select);
